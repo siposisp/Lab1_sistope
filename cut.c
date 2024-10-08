@@ -3,6 +3,31 @@
 #include <unistd.h>
 #include <getopt.h>
 
+// Entradas : Recibe el archivo de entrada
+// Salida :
+// Descripción : Recibe un archivo y lo procesa
+void procesar_archivo(char* filename) {
+    int contador = 0;
+    char line[256];
+
+    // Abrir el archivo en modo lectura
+    FILE* file = fopen(filename, "r");  
+    if (file == NULL) { // Verificar que el archivo se haya abierto correctamente
+        printf("Error al ingresar parametro flag -i. \nVerifique que el nombre sea correcto o si el archivo existe \n");
+        return;
+    }
+
+    //Leer linea por linea el archivo
+    while (fgets(line, sizeof(line), file)){
+        printf("%s", line);
+        contador++;
+    }
+
+    printf("\nNúmero total de líneas: %d\n", contador);
+
+    fclose(file);
+}
+
 int main(int argc, char *argv[])
 {
     printf("****************INICIO DEL PROGRAMA****************\n");
@@ -15,7 +40,7 @@ int main(int argc, char *argv[])
     char *columnas = NULL;
 
     //Se utiliza geopt para leer las opciones de línea de comandos
-    while ((option = getopt(argc, argv, "d:c:i:o:")) != -1) {
+    while ((option = getopt(argc, argv, "i:o:d:c:")) != -1) {
         switch (option) {
             case 'd':
                 separador = optarg; //carácter separador de la columnas
@@ -40,6 +65,8 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Debe ingresar el nombre para el archivo de entrada (-i). \n");
         exit(EXIT_FAILURE);
     }
+
+    procesar_archivo(archivoentrada);
 
     printf("*****************FIN DEL PROGRAMA*****************\n");
     return 0;
