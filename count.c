@@ -11,24 +11,24 @@ int main(int argc, char *argv[])
     int option;
     char *archivoentrada = NULL;
     char *archivosalida = "output.txt";
-    char *cantidad_lineas = 0;
-    char *cantidad_caracteres = 0;
+    char cantidad_lineas = 0;
+    char cantidad_caracteres = 0;
     FILE *archivo;
 
     //Se utiliza geopt para leer las opciones de línea de comandos
-    while ((option = getopt(argc, argv, "i:C:L:")) != -1) {
+    while ((option = getopt(argc, argv, "i:CL")) != -1) {
         switch (option) {
             case 'i':
                 archivoentrada = optarg; //Nombre del archivo de entrada
                 break;
             case 'C':
-                cantidad_caracteres = optarg; //Contar el número de caracteres
+                cantidad_caracteres = 1; //Contar el número de caracteres
                 break;
             case 'L':
-                cantidad_lineas = optarg;//Contar el numero de líneas
+                cantidad_lineas = 1;//Contar el numero de líneas
                 break;
             default:
-                fprintf(stderr, "Uso: %s [-i archivoentrada] [-o archivosalida] [-d separador] [-c cantidad_caracteres]\n", argv[0]);
+                fprintf(stderr, "Uso: %s [-i archivoentrada] [-L][-C]\n", argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
@@ -66,17 +66,16 @@ int main(int argc, char *argv[])
         }
     }
 
-
     fclose(archivo);
-    //Este no
-    if (cantidad_lineas) {
-        printf("%d ", lineas);
-    }
-    //Este funciona
-    if (cantidad_caracteres) {
-        printf("%d", caracteres);
-    }
 
+     // Imprimo los resultados dependiendo de las opciones pasadas
+    if (cantidad_lineas && cantidad_caracteres) {
+        printf("%d %d\n", lineas, caracteres);  // Si se pasa -L y -C, imprime líneas seguido de caracteres
+    } else if (cantidad_lineas) {
+        printf("%d\n", lineas);  // Solo líneas si se pasa -L
+    } else if (cantidad_caracteres) {
+        printf("%d\n", caracteres);  // Solo caracteres si se pasa -C
+    }
     printf("\n*****************FIN DEL PROGRAMA*****************\n");
     return 0;
 }
