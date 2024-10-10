@@ -3,16 +3,79 @@
 #include <unistd.h>
 #include <getopt.h>
 
-char* reemplazarCaracter(char *linea, char caracterAntiguo, char caracterNuevo) {
-    for (int i = 0; linea[i] != '\0'; i++) {
-        if (linea[i] == caracterAntiguo) {
-            linea[i] = caracterNuevo;
-        }
+
+char* concatenar_caracter(char* palabra, char c) {
+    int len = 0;
+    while (palabra[len] != '\0') {
+        len++;
     }
-    //printf(linea);
-    return linea;
+    
+    // Redimensionar la cadena palabra para agregar un carácter extra
+    palabra = (char *)realloc(palabra, (len + 2) * sizeof(char));
+    palabra[len] = c;
+    palabra[len + 1] = '\0';  // Agregar terminador nulo
+    return palabra;
 }
 
+char** linea_a_arreglo(char* linea) {
+    int i = 0, j = 0;
+    int capacidad = 1;  // Capacidad inicial del arreglo
+    int cantidad = 0;   // Cantidad de palabras
+    char** arreglo = NULL;  // Arreglo de cadenas
+    char* palabra = NULL;   // Palabra temporal
+
+    // Reservar memoria inicial para el arreglo
+    arreglo = (char**)malloc(capacidad * sizeof(char*));
+    if (arreglo == NULL) {
+        printf("Error al reservar memoria.\n");
+        exit(1);
+    }
+
+    // Inicializar la primera palabra
+    palabra = (char*)malloc(1 * sizeof(char));
+    palabra[0] = '\0';  // Inicialmente vacía
+
+    while (linea[i] != '\0') {
+        if (linea[i] != ';' && linea[i] != ':') {
+            // Concatenar el carácter actual a la palabra
+            palabra = concatenar_caracter(palabra, linea[i]);
+        } else {
+            // Agregar la palabra al arreglo
+            if (cantidad == capacidad) {
+                capacidad *= 2;  // Aumentar capacidad
+                arreglo = (char**)realloc(arreglo, capacidad * sizeof(char*));
+                if (arreglo == NULL) {
+                    printf("Error al redimensionar memoria.\n");
+                    exit(1);
+                }
+            }
+
+            arreglo[cantidad] = palabra;  // Agregar palabra al arreglo
+            cantidad++;
+
+            // Reservar memoria para la siguiente palabra
+            palabra = (char*)malloc(1 * sizeof(char));
+            palabra[0] = '\0';  // Inicializar nueva palabra
+        }
+        i++;
+    }
+
+    // Agregar la última palabra al arreglo
+    if (palabra[0] != '\0') {
+        if (cantidad == capacidad) {
+            capacidad *= 2;
+            arreglo = (char**)realloc(arreglo, capacidad * sizeof(char*));
+        }
+        arreglo[cantidad] = palabra;
+        cantidad++;
+    }
+
+    // Agregar un puntero nulo para marcar el final del arreglo
+    arreglo = (char**)realloc(arreglo, (cantidad + 1) * sizeof(char*));
+    arreglo[cantidad] = NULL;
+
+    return arreglo;
+}
 
 
 // Entradas : Recibe el archivo de entrada
@@ -30,9 +93,30 @@ void procesar_archivo(char* filename, char caracterAntiguo, char caracterNuevo) 
     }
 
     //Leer linea por linea el archivo
-    while (fgets(linea, sizeof(linea), file)){
-        char *uwu = reemplazarCaracter(linea, caracterAntiguo, caracterNuevo);
-        printf("%s", uwu);
+    //while (fgets(linea, sizeof(linea), file)){
+    //    //char *uwu = reemplazarCaracter(linea, caracterAntiguo, caracterNuevo);
+    //    char **uwu = linea_a_arreglo(linea);
+        //printf("%s", uwu);
+    //    contador++;
+    //}
+
+    //Leer linea por linea el archivo
+    while (fgets(linea, sizeof(linea), file)) {
+        char **uwu = linea_a_arreglo(linea);
+        
+        // Mostrar el contenido de uwu
+        int k = 0;
+        while (uwu[k] != NULL) {
+            printf("Palabra %d: %s\n", k + 1, uwu[k]);
+            k++;
+        }
+
+        // Liberar la memoria asignada a uwu
+        for (int i = 0; i < k; i++) {
+            free(uwu[i]);  // Liberar cada palabra
+        }
+        free(uwu);  // Liberar el arreglo de punteros
+
         contador++;
     }
 
