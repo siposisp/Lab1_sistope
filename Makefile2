@@ -1,0 +1,25 @@
+# Compilador y opciones para compilar
+CC = gcc
+CFLAGS = -Wall -Werror -g
+
+# Archivos principales a compilar
+SRCS = cut.c count.c srep.c
+OBJS = $(SRCS:.c=.o)
+
+# Nombre del ejecutable
+TARGET = cut count srep
+
+# Regla por defecto (la primera)
+all: $(TARGET)
+
+# Compilar el programa enlazando los objetos
+$(TARGET): $(OBJS)
+	$(CC) $(LDFLAGS) -o $(TARGET) $(OBJS)
+
+# Regla para compilar los archivos .c en .o
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Limpiar los archivos objeto y el ejecutable
+clean:
+	rm -f $(OBJS) $(TARGET)
