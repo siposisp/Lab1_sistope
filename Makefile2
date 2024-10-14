@@ -1,25 +1,33 @@
-# Compilador y opciones para compilar
+# Compilador
+
 CC = gcc
-CFLAGS = -Wall -Werror -g
 
-# Archivos principales a compilar
-SRCS = cut.c count.c srep.c
-OBJS = $(SRCS:.c=.o)
+# Nombres de los archivos ejecutables
+# - Primer archivo cut 
+# - Segundo archivo count
+# - Tercer archivo srep
 
-# Nombre del ejecutable
-TARGET = cut count srep
+SRC = cut.c count.c srep.c
+
+# Archivos ejecutables obtenidos
+# - Primer archivo cut 
+# - Segundo archivo count
+# - Tercer archivo srep
+
+TARGETS = cut count srep  
 
 # Regla por defecto (la primera)
-all: $(TARGET)
 
-# Compilar el programa enlazando los objetos
-$(TARGET): $(OBJS)
-	$(CC) $(LDFLAGS) -o $(TARGET) $(OBJS)
+all: $(TARGETS)
 
-# Regla para compilar los archivos .c en .o
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+# Regla para compilar cada ejecutable
 
-# Limpiar los archivos objeto y el ejecutable
+%: %.c
+	$(CC) -o $@ $<
+
+# Regla para limpiar los ejecutables y los archivos de texto
+
+.PHONY: clean
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(TARGETS) *.o out*.txt
+		
