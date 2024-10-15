@@ -174,12 +174,12 @@ void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* arc
                     posicion = columnas[i] - 1;
                     printf("%s", arreglo_de_linea[posicion]);
 
-
                 }
                 else{ 
                     posicion = columnas[i] - 1;
                     concatenado = concatenar_caracter(arreglo_de_linea[posicion], separador);
                     printf("%s", concatenado);
+                    
                 }
 
                 
