@@ -12,10 +12,10 @@ void opciones(int argc, char *argv[], char **archivoentrada, char **archivosalid
    while ((option = getopt(argc, argv, "i:o:s:S:")) != -1) {
         switch (option) {
             case 's':
-                *caracterAntiguo = optarg;  // caracteres antiguos a buscar
+                *caracterAntiguo = optarg;  // Strings antiguos a buscar
                 break;
             case 'S':
-                *caracterNuevo = optarg;  //  caracteres nuevos para reemplazar
+                *caracterNuevo = optarg;  //  Strings nuevos para reemplazar
                 break;
             case 'i':
                 *archivoentrada = optarg;  // Nombre del archivo de entrada
@@ -24,7 +24,7 @@ void opciones(int argc, char *argv[], char **archivoentrada, char **archivosalid
                 *archivosalida = optarg;  // Nombre del archivo de salida
                 break;
             default:
-                fprintf(stderr, "Uso: %s [-i archivoentrada] [-o archivosalida] [-s caracterAntiguo] [-S caracterNuevo]\n", argv[0]);
+                fprintf(stderr, "Uso: %s [-i archivoentrada] [-o archivosalida] [-s StringsAntiguos] [-S StringsNuevos]\n", argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
@@ -39,7 +39,7 @@ void opciones(int argc, char *argv[], char **archivoentrada, char **archivosalid
         exit(EXIT_FAILURE);
     }
     if (*caracterAntiguo == NULL || *caracterNuevo == NULL) {
-        fprintf(stderr, "Debe ingresar el caracter antiguo (-s) y el caracter nuevo (-S).\n");
+        fprintf(stderr, "Debe ingresar los Strings antiguos (-s) y los Strings nuevos (-S).\n");
         exit(EXIT_FAILURE);
     }
 
@@ -92,6 +92,20 @@ char* reemplazar_caracter(char *linea, const char* caracterAntiguo, const char* 
     return nuevaLinea;
 }
 
+// Entradas: Recibe un char* correspondiente al nombre del archivo de output
+// Salida: Retorna un elemento de tipo FILE correspondiente al archivo de salida
+// Descripción: Verifica si el archivo de output existe, si existe lo limpia y si no existe lo crea y lo deja abierto
+FILE* vaciar_archivo(char *nombreArchivo){
+    FILE *archivo = fopen(nombreArchivo, "w");
+
+    // Verificar si el archivo se abrió correctamente
+    if (archivo == NULL) {
+        printf("Error al abrir el archivo.\n");
+    }
+
+    return archivo;
+}
+
 // Función para procesar el archivo
 void procesar_archivo(char* filename, char* output_filename, char* caracterAntiguo, char* caracterNuevo) {
     int contador = 0;
@@ -104,18 +118,13 @@ void procesar_archivo(char* filename, char* output_filename, char* caracterAntig
         return;
     }
 
-    // Abrir el archivo de salida en modo escritura
-    FILE* output_file = fopen(output_filename, "w");
-    if (output_file == NULL) {
-        printf("Error al abrir el archivo de salida.\n");
-        fclose(file);
-        return;
-    }
+    FILE* output_file = vaciar_archivo(output_filename); //Se limpia el archivo de salida, si es que existe, sino se crea
+
 
     // Leer línea por línea el archivo de entrada
     while (fgets(linea, sizeof(linea), file)) {
-        char *uwu = reemplazar_caracter(linea, caracterAntiguo, caracterNuevo);
-        fprintf(output_file, "%s", uwu);  
+        char *linea_nueva= reemplazar_caracter(linea, caracterAntiguo, caracterNuevo);
+        fprintf(output_file, "%s", linea_nueva);  
         contador++;
     }
     // Cerrar los archivos
