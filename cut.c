@@ -172,20 +172,23 @@ void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* arc
                 if ((i+1) == largoarreglo)
                 {
                     posicion = columnas[i] - 1;
-                    printf("%s", arreglo_de_linea[posicion]);
+                    //printf("%s", arreglo_de_linea[posicion]);
+                    guardar_en_archivo(archivosalida, arreglo_de_linea[posicion]);
 
                 }
                 else{ 
                     posicion = columnas[i] - 1;
                     concatenado = concatenar_caracter(arreglo_de_linea[posicion], separador);
-                    printf("%s", concatenado);
+                    //printf("%s", concatenado);
+                    guardar_en_archivo(archivosalida,concatenado);
                     
                 }
 
                 
 
             }
-            printf("\n");
+            guardar_en_archivo(archivosalida, "\n"); //agregar salto de línea
+ 
 
             // Liberar la memoria asignada a uwu
             for (int i = 0; i < posicion; i++) {
