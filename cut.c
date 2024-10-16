@@ -342,28 +342,50 @@ int main(int argc, char *argv[])
                 archivosalida = optarg; //Nombre del archivo de salida
                 break;
             default:
-                fprintf(stderr, "Uso: %s [-i archivoentrada] [-o archivosalida] [-d separador] [-c columnas]\n", argv[0]);
+                fprintf(stderr, "Uso: %s [-d separador] [-c columnas]\n", argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
 
     //Manejo de errores en el archivo
-    if (archivoentrada == NULL){
-        fprintf(stderr, "Debe ingresar el nombre para el archivo de entrada (-i). \n");
-        exit(EXIT_FAILURE);
+    if (archivoentrada == NULL) {
+        // Si no se proporciona un archivo de entrada, pedir al usuario que ingrese el nombre
+        char nombre_archivo[256];
+        printf("Ingrese el nombre del archivo de entrada: ");
+        
+        if (fscanf(stdin, "%s", nombre_archivo) == 1) {  // Leer desde stdin
+            archivoentrada = strdup(nombre_archivo); // Asignar el nombre del archivo a archivoentrada
+        } else {
+            fprintf(stderr, "Error al leer el nombre del archivo de entrada.\n");
+            exit(EXIT_FAILURE);
+        }
     }
+
+    if (archivosalida == NULL) {
+        // Si no se proporciona un archivo de entrada, pedir al usuario que ingrese el nombre
+        char nombre_archivo[256];
+        printf("Ingrese el nombre del archivo de salida: ");
+        
+        if (fscanf(stdin, "%s", nombre_archivo) == 1) {  // Leer desde stdin
+            archivosalida = strdup(nombre_archivo); // Asignar el nombre del archivo a archivoentrada
+        } else {
+            fprintf(stderr, "Error al leer el nombre del archivo de salida.\n");
+            exit(EXIT_FAILURE);
+        }
+    }
+
 
     vaciar_archivo(archivosalida); //Se limpia el archivo de salida, si es que existe
 
     
     if(columnas != NULL)
     {
-    int cantidad_numeros = cantidad_de_numeros(columnas);
-    int* arreglo_numeros = arreglo_char_to_int(columnas);
+        int cantidad_numeros = cantidad_de_numeros(columnas);
+        int* arreglo_numeros = arreglo_char_to_int(columnas);
 
-    procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
+        procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
 
-    free(arreglo_numeros);
+        free(arreglo_numeros);
     }
     else{
         reimprimir_archivo(archivoentrada,archivosalida);
