@@ -323,7 +323,7 @@ int main(int argc, char *argv[])
     int option;
     char *archivoentrada = NULL;
     char *archivosalida = NULL;
-    char separador = '\0';
+    char separador = "t";
     char *columnas = NULL;
 
     //Se utiliza geopt para leer las opciones de línea de comandos
@@ -333,7 +333,7 @@ int main(int argc, char *argv[])
                 separador = optarg[0]; //carácter separador de la columnas
                 break;
             case 'c':
-                columnas = optarg; //Indicar la o las columnas OOOOOOOOOJOOOOOOOOOOOOOOOOOO QUE SI NO INDICA DEBEN IMPRIMIRSE TODAS
+                columnas = optarg; //Indicar la o las columnas 
                 break;
             case 'i':
                 archivoentrada = optarg; //Nombre del archivo de entrada
@@ -381,6 +381,7 @@ int main(int argc, char *argv[])
     if(columnas != NULL)
     {
         int cantidad_numeros = cantidad_de_numeros(columnas);
+        //revisar que sean positivosssssssssssssssssssssssssssssssss
         int* arreglo_numeros = arreglo_char_to_int(columnas);
 
         procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
