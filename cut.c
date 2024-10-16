@@ -198,21 +198,41 @@ void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* arc
             {
                 if ((i+1) == largoarreglo)
                 {
-                    posicion = columnas[i] - 1;
-                    //printf("%s", arreglo_de_linea[posicion]);
-                    guardar_en_archivo(archivosalida, arreglo_de_linea[posicion]);
+                    posicion = columnas[i] - 1; // Disminuimos en 1 porque los arreglos parten de 0
+
+                    if(archivosalida==NULL){
+                        printf("%s", arreglo_de_linea[posicion]);
+                    }
+                    else{
+                        guardar_en_archivo(archivosalida, arreglo_de_linea[posicion]);
+                    }
 
                 }
                 else{ 
                     posicion = columnas[i] - 1;
                     concatenado = concatenar_caracter(arreglo_de_linea[posicion], separador);
-                    guardar_en_archivo(archivosalida,concatenado);
+
+                    if(archivosalida==NULL){
+                        printf("%s", concatenado);
+                    }
+                    else{
+                        guardar_en_archivo(archivosalida,concatenado);
+                    }
+
+                    
                     free(concatenado); // LIBERAR DESPUÉS DE USAR
                 }
             }
 
-            guardar_en_archivo(archivosalida, "\n"); //agregar salto de línea
+            //agregar salto de línea
+            if(archivosalida == NULL){
+                printf("\n");
+            }
+            else{
+                guardar_en_archivo(archivosalida, "\n"); 
  
+            }
+
 
             // Liberar la memoria asignada a uwu
             for (int i = 0; i < posicion; i++) {
@@ -314,16 +334,15 @@ void reimprimir_archivo(char* filename, char* archivosalida) {
 }
 
 
-
 int main(int argc, char *argv[])
 {
-    printf("****************INICIO DEL PROGRAMA****************\n\n");
+    printf("****************INICIO DEL PROGRAMA****************\n");
 
     // Leer argumentos de la línea de comandos
     int option;
     char *archivoentrada = NULL;
     char *archivosalida = NULL;
-    char separador = "t";
+    char separador = '\0';
     char *columnas = NULL;
 
     //Se utiliza geopt para leer las opciones de línea de comandos
@@ -361,27 +380,16 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (archivosalida == NULL) {
-        // Si no se proporciona un archivo de entrada, pedir al usuario que ingrese el nombre
-        char nombre_archivo[256];
-        printf("Ingrese el nombre del archivo de salida: ");
-        
-        if (fscanf(stdin, "%s", nombre_archivo) == 1) {  // Leer desde stdin
-            archivosalida = strdup(nombre_archivo); // Asignar el nombre del archivo a archivoentrada
-        } else {
-            fprintf(stderr, "Error al leer el nombre del archivo de salida.\n");
-            exit(EXIT_FAILURE);
-        }
+    if(archivosalida != NULL){
+        vaciar_archivo(archivosalida); //Se limpia el archivo de salida, si es que existe
     }
-
-
-    vaciar_archivo(archivosalida); //Se limpia el archivo de salida, si es que existe
+    
 
     
     if(columnas != NULL)
     {
         int cantidad_numeros = cantidad_de_numeros(columnas);
-        //revisar que sean positivosssssssssssssssssssssssssssssssss
+        //revisar que sean positivosssssssssssssssssssssssssssssssssssssssssssss
         int* arreglo_numeros = arreglo_char_to_int(columnas);
 
         procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
