@@ -42,6 +42,11 @@ char** linea_a_arreglo(char* linea, char simbolo) {
 
     // Inicializar la primera palabra
     palabra = (char*)malloc(1 * sizeof(char));
+    if (palabra == NULL) {
+        printf("Error al reservar memoria para la palabra.\n");
+        free(arreglo);
+        exit(1);
+    }
     palabra[0] = '\0';  // Arreglo inicial vacío
 
     while (linea[i] != '\0') {
@@ -55,6 +60,10 @@ char** linea_a_arreglo(char* linea, char simbolo) {
                 arreglo = (char**)realloc(arreglo, capacidad * sizeof(char*));
                 if (arreglo == NULL) {
                     printf("Error al redimensionar memoria.\n");
+                    for (int k = 0; k < cantidad; k++) {
+                        free(arreglo[k]);
+                    }
+                    free(palabra);  // Liberar la palabra actual
                     exit(1);
                 }
             }
@@ -64,23 +73,50 @@ char** linea_a_arreglo(char* linea, char simbolo) {
 
             // Reservar memoria para la siguiente palabra
             palabra = (char*)malloc(1 * sizeof(char));
+            if (palabra == NULL) {
+                printf("Error al reservar memoria para la nueva palabra.\n");
+                for (int k = 0; k < cantidad; k++) {
+                    free(arreglo[k]);
+                }
+                free(arreglo);
+                exit(1);
+            }
             palabra[0] = '\0';  // Inicializar nueva palabra
         }
         i++;
     }
+
 
     // Se agregar la última palabra al arreglo
     if (palabra[0] != '\0') {
         if (cantidad == capacidad) {
             capacidad = capacidad + 1;
             arreglo = (char**)realloc(arreglo, capacidad * sizeof(char*));
+            if (arreglo == NULL) {
+                printf("Error al redimensionar memoria para la última palabra.\n");
+                for (int k = 0; k < cantidad; k++) {
+                    free(arreglo[k]);
+                }
+                free(palabra);
+                exit(1);
+            }
         }
         arreglo[cantidad] = palabra;
         cantidad++;
+    } else {
+        // Si la última palabra está vacía, liberarla
+        free(palabra);
     }
 
     // Agregar un puntero nulo para marcar el final del arreglo
     arreglo = (char**)realloc(arreglo, (cantidad + 1) * sizeof(char*));
+    if (arreglo == NULL) {
+        printf("Error al redimensionar memoria para el puntero nulo.\n");
+        for (int k = 0; k < cantidad; k++) {
+            free(arreglo[k]);
+        }
+        exit(1);
+    }
     arreglo[cantidad] = NULL;
 
     return arreglo;
@@ -120,17 +156,6 @@ void guardar_en_archivo(char *nombreArchivo, char* contenidoLinea){
 
     // Cerrar el archivo
     fclose(archivo);
-}
-
-// Función para verificar si un número está en un arreglo
-int buscar_numero_en_arreglo(int* arreglo, int tamano, int numero) {
-
-    for (int i = 0; i < tamano; i++) {
-        if (arreglo[i] == numero) {
-            return 1;  // El número está en el arreglo
-        }
-    }
-    return 0;  // El número no está en el arreglo
 }
 
 
@@ -182,6 +207,7 @@ void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* arc
                     posicion = columnas[i] - 1;
                     concatenado = concatenar_caracter(arreglo_de_linea[posicion], separador);
                     guardar_en_archivo(archivosalida,concatenado);
+                    free(concatenado); // LIBERAR DESPUÉS DE USAR
                 }
             }
 
@@ -199,7 +225,7 @@ void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* arc
         //guardar_en_archivo(archivosalida, linea);
     }
 
-    printf("\nArchivo procesado exitosamente");
+    printf("Archivo procesado exitosamente\n");
 
     fclose(file);
 }
@@ -243,7 +269,7 @@ int cantidad_de_numeros(char* columnas) {
 int* arreglo_char_to_int(char* lista)
 {
 
-    char **uwu = linea_a_arreglo(lista, ',');
+    char **arreglo_aux = linea_a_arreglo(lista, ',');
     
     int cantidad_numeros =  cantidad_de_numeros(lista);
     int* arreglo_numeros = (int*) malloc((cantidad_numeros) * sizeof(int));
@@ -252,10 +278,39 @@ int* arreglo_char_to_int(char* lista)
     //int j=0; //para avanzar en el arreglo de int
     for(i; i < cantidad_numeros; i++)
     {
-        arreglo_numeros[i] = atoi(uwu[i]);
+        arreglo_numeros[i] = atoi(arreglo_aux[i]);
     }
-    free(uwu);
+    
+    for (i = 0; arreglo_aux[i] != NULL; i++) { // Liberar el arreglo de cadenas
+    free(arreglo_aux[i]);
+    }
+    free(arreglo_aux);
+
     return arreglo_numeros;
+}
+
+
+
+
+
+void reimprimir_archivo(char* filename, char* archivosalida) {
+    char linea[1024];
+
+    // Abrir el archivo en modo lectura
+    FILE* file = fopen(filename, "r");  
+    if (file == NULL) { // Verificar que el archivo se haya abierto correctamente
+        printf("Error al ingresar parametro flag -i. \nVerifique que el nombre sea correcto o si el archivo existe \n");
+        return;
+    }
+
+    //Leer linea por linea el archivo
+    while (fgets(linea, sizeof(linea), file)) {
+        guardar_en_archivo(archivosalida, linea);
+    }
+
+    printf("Archivo procesado exitosamente\n");
+
+    fclose(file);
 }
 
 
@@ -309,6 +364,9 @@ int main(int argc, char *argv[])
     procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
 
     free(arreglo_numeros);
+    }
+    else{
+        reimprimir_archivo(archivoentrada,archivosalida);
     }
 
 
