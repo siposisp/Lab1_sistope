@@ -7,17 +7,20 @@
 // Entradas: Recibe un char* (una palabra) y un char (un caracter)
 // Salida: Retorna un char* (una palabra con el char concatenado)
 // Descripción: Agrega un caracter a una palabra Ej: "hol"+ "a" resulta "hola"
-char* concatenar_caracter(char* palabra, char caracter) {
-    int i = 0;
-    while (palabra[i] != '\0') {
-        i++;
-    }
-    
-    // Redimensionar la cadena palabra para agregar un carácter extra
-    palabra = (char *)realloc(palabra, (i + 2) * sizeof(char));
-    palabra[i] = caracter;
-    palabra[i + 1] = '\0';  // Agregar un caracter nulo al final
-    return palabra;
+char* concatenar_caracter(const char* palabra, char caracter) {
+    int longitud = strlen(palabra);  // Obtener la longitud de la cadena original
+
+    // Crear una nueva palabra con espacio adicional para el nuevo carácter y el carácter nulo
+    char* nueva_palabra = (char*) malloc((longitud + 2) * sizeof(char)); 
+
+    // Copiar la cadena original a la nueva palabra
+    strcpy(nueva_palabra, palabra);
+
+    // Añadir el nuevo carácter al final de la nueva palabra
+    nueva_palabra[longitud] = caracter;
+    nueva_palabra[longitud + 1] = '\0';
+
+    return nueva_palabra; 
 }
 
 // Entradas: Recibe un char* correspondiente a una linea del archivo
@@ -147,7 +150,6 @@ int buscar_caracter_en_arreglo(char* arreglo, int tamano, char caracter) {
 // Salida : No retorna nada
 // Descripción : 
 void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* archivosalida, char separador) {
-    int contador = 0;
     char linea[1024];
 
     // Abrir el archivo en modo lectura
@@ -179,14 +181,10 @@ void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* arc
                 else{ 
                     posicion = columnas[i] - 1;
                     concatenado = concatenar_caracter(arreglo_de_linea[posicion], separador);
-                    //printf("%s", concatenado);
                     guardar_en_archivo(archivosalida,concatenado);
-                    
                 }
-
-                
-
             }
+
             guardar_en_archivo(archivosalida, "\n"); //agregar salto de línea
  
 
@@ -196,26 +194,14 @@ void procesar_archivo(char* filename, int* columnas, int largoarreglo, char* arc
             }
             free(arreglo_de_linea);  // Liberar el arreglo de punteros
 
-            contador++;
         }
 
         //guardar_en_archivo(archivosalida, linea);
     }
 
-    printf("\nNúmero total de líneas: %d\n", contador);
+    printf("\nArchivo procesado exitosamente");
 
     fclose(file);
-}
-
-// Función para convertir un carácter que representa un dígito a un entero
-int char_to_int(char c) {
-    if (c >= '0' && c <= '9') {
-        return c - '0'; // Convertir el carácter a entero
-    } else {
-        // Manejo de error si el carácter no es un dígito
-        printf("Error: El carácter '%c' no es un dígito válido.\n", c);
-        return -1; // Retorna -1 en caso de error
-    }
 }
 
 // Obtiene la cantidad de números que se pasan. Ej: 10,4,3,4,5,6 retorna 6
@@ -313,23 +299,18 @@ int main(int argc, char *argv[])
     }
 
     vaciar_archivo(archivosalida); //Se limpia el archivo de salida, si es que existe
-/*
-    int cantidad_numeros =  cantidad_de_numeros(columnas);
 
-    int* arreglo_numeros = (int*) malloc((cantidad_numeros) * sizeof(int));
-
-    arreglo_numeros = arreglo_char_to_int(columnas);
-*/
-
-    //procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
     
-
+    if(columnas != NULL)
+    {
     int cantidad_numeros = cantidad_de_numeros(columnas);
     int* arreglo_numeros = arreglo_char_to_int(columnas);
 
     procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
 
     free(arreglo_numeros);
+    }
+
 
     printf("\n*****************FIN DEL PROGRAMA*****************\n");
     return 0;
