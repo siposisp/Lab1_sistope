@@ -64,7 +64,7 @@ Ejemplo de comando para ejecutar:
        
               ./count -i input.txt -C
 
-Obs: El programa está preparado para valores erróneos que puedan ser ingresados.
+Obs: El programa está preparado para entregar los valores solicitados de ejemplo en la rubrica.
 
 <h2>Excepciones</h2>
 
