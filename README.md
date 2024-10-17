@@ -16,10 +16,7 @@ Cómo ejecutar este proyecto
 1.Compilar mediante el comando make.
 2.Para ejecutar debes estar conciente de las siguientes definiciones para los flags para los diferentes archivos:
 
- <html>
-          <head>
-            <title>Primer Programa</title>
-          </head>
+<code>  Primer Programa </code>
 
 Primer Programa
 
