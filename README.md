@@ -18,25 +18,21 @@ Cómo ejecutar este proyecto
 
 2.Para ejecutar debes estar conciente de las siguientes definiciones para los flags para los diferentes archivos:
 
-  Primer Programa 
-
+<h3>Primer Programa</h3>
 
     <?php
-        echo "Hello world!";
+       -i: es el archivo de entrada 
+       -o: es el archivo de salida
+       -d: es el separador
+       -c: es el indicador de columnas
     ?>
       
 
--i: es el archivo de entrada 
- 
--o: es el archivo de salida
-
--d: es el separador
- 
--c: es el indicador de columnas
 
 
 
-Primer Programa
+
+
 
 -i: es el archivo de entrada 
  
