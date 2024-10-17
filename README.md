@@ -13,10 +13,10 @@ Este laboratorio tiene como objetivo aplicar técnicas de programación imperati
 Cómo ejecutar este proyecto
 
 0.Se requiere un sistema operativo linux-based.
-1.Compilar mediante el comando make.
+1.Compilar mediante el comando <code>make</code>.
 2.Para ejecutar debes estar conciente de las siguientes definiciones para los flags para los diferentes archivos:
 
-<code>  Primer Programa 
+  Primer Programa 
 
 -i: es el archivo de entrada 
  
@@ -26,7 +26,7 @@ Cómo ejecutar este proyecto
  
 -c: es el indicador de columnas
 
-</code>
+
 
 Primer Programa
 
