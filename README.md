@@ -93,7 +93,7 @@ Ejemplo de compilado correcto:
 
               ./srep -i input.txt -o ouput.txt -s root -S //
              
-<h2>Descripcion</h2>
+<h2>Descripción</h2>
 
 En este laboratorio se implementara algunas funciones simplificadas de las que provienen UNIX, en la que se realizaran distintas manipulaciones de texto sobre los archivos csv entregados. Cada una de estas funciones sera un archivo .c distinto, el cual realizara el simil de la funcion UNIX respectiva. Finalmente, estos archivos se ejecutarn por linea de comando.
 
