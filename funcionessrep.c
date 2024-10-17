@@ -4,48 +4,6 @@
 #include <getopt.h>
 #include "funcionessrep.h"
 
-// Función opciones
-// Entradas : Recibe los comandos de entrada
-// Salida : void
-// Descripción : Recibe los comandos de entrada, [-i archivoentrada] [o- archivosalida][-s] [-S] para realizar la lectura de comandos.
-void opciones(int argc, char *argv[], char **archivoentrada, char **archivosalida,char **caracterAntiguo, char **caracterNuevo) {
-   int option;
-   while ((option = getopt(argc, argv, "i:o:s:S:")) != -1) {
-        switch (option) {
-            case 's':
-                *caracterAntiguo = optarg;  // Strings antiguos a buscar
-                break;
-            case 'S':
-                *caracterNuevo = optarg;  //  Strings nuevos para reemplazar
-                break;
-            case 'i':
-                *archivoentrada = optarg;  // Nombre del archivo de entrada
-                break;
-            case 'o':
-                *archivosalida = optarg;  // Nombre del archivo de salida
-                break;
-            default:
-                fprintf(stderr, "Uso: %s [-i archivoentrada] [-o archivosalida] [-s StringsAntiguos] [-S StringsNuevos]\n", argv[0]);
-                exit(EXIT_FAILURE);
-        }
-    }
-
-    //Manejo de errores en el archivo
-    if (*archivoentrada == NULL) {
-        fprintf(stderr, "Debe ingresar el nombre para el archivo de entrada (-i).\n");
-        exit(EXIT_FAILURE);
-    }
-     if (*archivosalida == NULL) {
-        fprintf(stderr, "Debe ingresar el nombre del archivo de salida (-o).\n");
-        exit(EXIT_FAILURE);
-    }
-    if (*caracterAntiguo == NULL || *caracterNuevo == NULL) {
-        fprintf(stderr, "Debe ingresar los Strings antiguos (-s) y los Strings nuevos (-S).\n");
-        exit(EXIT_FAILURE);
-    }
-
-}
-
 // Función para determinar si una subcadena está presente en una línea
 int buscar_cadena_caracteres(const char* linea, const char* subcadena, int indice) {
     int i = 0;
@@ -119,20 +77,32 @@ void procesar_archivo(char* filename, char* output_filename, char* caracterAntig
         return;
     }
 
-    FILE* output_file = vaciar_archivo(output_filename); //Se limpia el archivo de salida, si es que existe, sino se crea
-
+    FILE* output_file;
+    if (output_filename != NULL) {
+        output_file = fopen(output_filename, "w");
+        if (output_file == NULL) {
+            printf("Error al abrir el archivo de salida.\n");
+            fclose(file);
+            return;
+        }
+    } else {
+        output_file = stdout;  // Si no se proporciona archivo, se usa la consola
+    }
 
     // Leer línea por línea el archivo de entrada
     while (fgets(linea, sizeof(linea), file)) {
-        char *linea_nueva= reemplazar_caracter(linea, caracterAntiguo, caracterNuevo);
+        char *linea_nueva = reemplazar_caracter(linea, caracterAntiguo, caracterNuevo);
         fprintf(output_file, "%s", linea_nueva);  
         contador++;
     }
-    // Cerrar los archivos
-    fclose(file);
-    fclose(output_file);
 
-    printf("Archivo procesado....\nSe escribieron %d lineas en el archivo de salida.\n", contador);
+    // Cerrar los archivos si es necesario
+    fclose(file);
+    if (output_file != stdout) {
+        fclose(output_file);
+    }
+
+    printf("Archivo procesado....\nSe escribieron %d lineas.\n", contador);
 }
 
 

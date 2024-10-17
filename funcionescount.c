@@ -3,36 +3,6 @@
 #include <unistd.h>
 #include <getopt.h>
 
-// Función opciones
-// Entradas : Recibe los comandos de entrada
-// Salida : void
-// Descripción : Recibe los comandos de entrada, [-i archivoentrada] [-L] [-C] para realizar la lectura de comandos.
-void opciones(int argc, char *argv[], char **archivoentrada, char *cantidad_caracteres, char *cantidad_lineas) {
-    int option;
-    while ((option = getopt(argc, argv, "i:CL")) != -1) {
-        switch (option) {
-            case 'i':
-                *archivoentrada = optarg; // Nombre del archivo de entrada
-                break;
-            case 'C':
-                *cantidad_caracteres = 1; // Contar el número de caracteres
-                break;
-            case 'L':
-                *cantidad_lineas = 1; // Contar el número de líneas
-                break;
-            default:
-                fprintf(stderr, "Uso: %s [-i archivoentrada] [-L] [-C]\n", argv[0]);
-                exit(EXIT_FAILURE);
-        }
-    }
-
-    //Manejo de errores en el archivo
-    if (*archivoentrada == NULL) {
-        fprintf(stderr, "Debe ingresar el nombre para el archivo de entrada (-i).\n");
-        exit(EXIT_FAILURE);
-    }
-}
-
 // Función procesar_archivo
 // Entradas : Recibe como char el nombre del archivo.
 // Salida : archivo.
