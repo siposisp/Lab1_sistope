@@ -72,27 +72,36 @@ Obs: El programa está preparado para valores erróneos que puedan ser ingresado
 
 
 Los comandos separados por ejemplo hola mundo, deben ser escritos entre comillas para realizar el correcto reemplazo.
+
 Ejemplo de compilado correcto:
-./srep -i input.txt -o ouput.txt -s root -S "hola mundo"
 
+              ./srep -i input.txt -o ouput.txt -s root -S "hola mundo"    
+              
 Lo anterior debido a que el programa reemplaza hasta que lea un espacio en blanco.
-Caso de erroneo:
-./srep -i input.txt -o ouput.txt -s root -S hola mundo
 
+Caso de erroneo:
+
+              ./srep -i input.txt -o ouput.txt -s root -S hola mundo
+       
+            
 Se cambiara los root solo por hola y no la palabra completa.
 
 Existen comandos que deben ser escritos doblemente debido a diversos factores en el sistema operativo Linux. Por ejemplo:
-"/".
-Ejemplo de compilado correcto:
-./srep -i input.txt -o ouput.txt -s root -S //
+<code>"/".</code>
 
-Descripcion
+Ejemplo de compilado correcto:
+
+              ./srep -i input.txt -o ouput.txt -s root -S //
+             
+<h2>Descripcion</h2>
 
 En este laboratorio se implementara algunas funciones simplificadas de las que provienen UNIX, en la que se realizaran distintas manipulaciones de texto sobre los archivos csv entregados. Cada una de estas funciones sera un archivo .c distinto, el cual realizara el simil de la funcion UNIX respectiva. Finalmente, estos archivos se ejecutarn por linea de comando.
-Funcion Cut
+
+<h3>Funcion Cut</h3>
 El programa cut se usa para extraer informaci´on sobre nuestro archivo de entrada .csv o, en caso de no especificar un archivo de entrada, sobre un stdin, con el objetivo de obtener ciertas columnas
 de interes.
-Funcion Srep
+
+<h3>Funcion Srep</h3>
 El programa srep (String Replace) realiza un reemplazo del “string objetivo” (el que se encuentra dentro del archivo) por el “string nuevo” (el que ocupara el nuevo lugar dentro del archivo). Este cambio debe realizarse para todas las instancias en el que se encuentre el “string objetivo”. Finalmente se debera guardar la informacion reemplazada en un archivo de salida.
-Funcion Count
+<h3>Funcion Count</h3>
 El programa count se usa para obtener el total de lineas, palabras o bytes contenidos en el archivo csv, siendo en el caso de indicar un archivo de entrada; en caso contrario, la entrada sera por stdin.
