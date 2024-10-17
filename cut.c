@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     int option;
     char *archivoentrada = NULL;
     char *archivosalida = NULL;
-    char separador = 't';
+    char separador = '\0';
     char *columnas = NULL;
 
     //Se utiliza geopt para leer las opciones de línea de comandos
