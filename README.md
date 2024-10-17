@@ -2,19 +2,24 @@
 
 Este repositorio contiene el primer laboratorio del curso de Sistemas Operativos, principalmente enfocado en diferentes aspectos del manejo de procesos en un sistema operativo Linux.
 
-Laboratorio 1: Programación Imperativa en C
+Laboratorio 1: Funciones Unix
 
 Este laboratorio tiene como objetivo aplicar técnicas de programación imperativa mediante lenguaje C, como la recepción de parámetros mediante getopt y compilación mediante Makefile sobre sistema operativo Linux.
 
 <h3>Autor: Nicolas Gajardo & Cristian Romero</h3>
 
-Fecha: 17-10-2024
+<h3>Fecha: 17-10-2024</h3>
 
 Cómo ejecutar este proyecto
 
-Se requiere un sistema operativo linux-based.
-Compilar mediante el comando make.
-Para ejecutar debes estar conciente de las siguientes definiciones para los flags para los diferentes archivos:
+0.Se requiere un sistema operativo linux-based.
+1.Compilar mediante el comando make.
+2.Para ejecutar debes estar conciente de las siguientes definiciones para los flags para los diferentes archivos:
+
+ <html>
+          <head>
+            <title>Primer Programa</title>
+          </head>
 
 Primer Programa
 
