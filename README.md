@@ -75,7 +75,9 @@ Los comandos separados por ejemplo hola mundo, deben ser escritos entre comillas
 
 Ejemplo de compilado correcto:
 
-              ./srep -i input.txt -o ouput.txt -s root -S "hola mundo"    
+              ./srep -i input.txt -o ouput.txt -s root -S "hola mundo"  
+
+              ./srep -i input.txt -o ouput.txt -s root -S "hola_mundo"  
               
 Lo anterior debido a que el programa reemplaza hasta que lea un espacio en blanco.
 
