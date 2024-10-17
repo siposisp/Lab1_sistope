@@ -5,12 +5,12 @@
 #include <string.h>
 #include "funcionescut.h"
 
-
+//Bloque Principal
 int main(int argc, char *argv[])
 {
     printf("****************INICIO DEL PROGRAMA****************\n\n");
 
-    // Leer argumentos de la línea de comandos
+    // Variables para almacenar las opciones de línea de comandos
     int option;
     char *archivoentrada = NULL;
     char *archivosalida = NULL;
@@ -53,27 +53,28 @@ int main(int argc, char *argv[])
     }
 
     if(archivosalida != NULL){
+        // Llamado a la funcion vaciar_archivo
         vaciar_archivo(archivosalida); //Se limpia el archivo de salida, si es que existe
     }
     
-
     if(columnas != NULL)
     {
+        // Llamado a la funcion cantidad_de_numeros    
         int cantidad_numeros = cantidad_de_numeros(columnas);
         if(cantidad_numeros==-1){
             exit(1);
         }
+        // Llamado a la funcion arreglo_char_to_int
         int* arreglo_numeros = arreglo_char_to_int(columnas);
-
+        // Llamado a la funcion procesar_archivo
         procesar_archivo(archivoentrada, arreglo_numeros, cantidad_numeros, archivosalida, separador);
-
+        // Liberacion del arreglo
         free(arreglo_numeros);
     }
     else{
+        // Llamado a la funcion reimprimir_archivo
         reimprimir_archivo(archivoentrada,archivosalida);
     }
-
-
     printf("\n*****************FIN DEL PROGRAMA*****************\n");
     return 0;
 }

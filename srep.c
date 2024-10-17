@@ -4,10 +4,11 @@
 #include <getopt.h>
 #include "funcionessrep.h"
 
+//Bloque Principal
 int main(int argc, char *argv[]) {
     printf("****************INICIO DEL PROGRAMA****************\n");
 
-    // Variables locales
+    // Variables para almacenar las opciones de línea de comandos
     char *archivoentrada = NULL;
     char *archivosalida = NULL;
     char *caracterAntiguo = NULL;
@@ -47,14 +48,10 @@ int main(int argc, char *argv[]) {
             exit(EXIT_FAILURE);
         }
     }
-
     if(archivosalida != NULL){
         vaciar_archivo(archivosalida); //Se limpia el archivo de salida, si es que existe
     }
    
-   //Llamado a la funcion opciones
-    //opciones(argc, argv, &archivoentrada, &archivosalida, &caracterAntiguo, &caracterNuevo);
-
     //Llamado a la funcion procesar_archivo
     procesar_archivo(archivoentrada, archivosalida, caracterAntiguo, caracterNuevo);
 

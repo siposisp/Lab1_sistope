@@ -48,9 +48,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Llamado de la funcion opciones
-    //opciones(argc, argv, &archivoentrada, &cantidad_caracteres, &cantidad_lineas);
-
     // Abrir el archivo de entrada
     FILE *archivo = procesar_archivo(archivoentrada);
 
