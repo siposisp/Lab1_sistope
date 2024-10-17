@@ -57,7 +57,6 @@ int main(int argc, char *argv[])
     }
     
 
-    
     if(columnas != NULL)
     {
         int cantidad_numeros = cantidad_de_numeros(columnas);

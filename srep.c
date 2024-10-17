@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <getopt.h>
-#include "funcionesrep.c"
+#include "funcionessrep.h"
 
 int main(int argc, char *argv[]) {
     printf("****************INICIO DEL PROGRAMA****************\n");
