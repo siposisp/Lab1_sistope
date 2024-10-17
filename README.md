@@ -20,6 +20,12 @@ Cómo ejecutar este proyecto
 
   Primer Programa 
 
+
+    <?php
+        echo "Hello world!";
+    ?>
+      
+
 -i: es el archivo de entrada 
  
 -o: es el archivo de salida
