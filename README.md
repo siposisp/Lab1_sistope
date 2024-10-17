@@ -1,3 +1,4 @@
+<h1>Heading level 1</h1>
 Sistemas Operativos: Laboratorios 1
 
 Este repositorio contiene el primer laboratorio del curso de Sistemas Operativos, principalmente enfocado en diferentes aspectos del manejo de procesos en un sistema operativo Linux.
@@ -6,7 +7,7 @@ Laboratorio 1: Programación Imperativa en C
 
 Este laboratorio tiene como objetivo aplicar técnicas de programación imperativa mediante lenguaje C, como la recepción de parámetros mediante getopt y compilación mediante Makefile sobre sistema operativo Linux.
 
-Autor: Nicolas Guajardo & Cristian Romero
+Autor: Nicolas Gajardo & Cristian Romero
 
 Fecha: 17-10-2024
 
