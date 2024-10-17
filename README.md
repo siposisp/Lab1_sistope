@@ -16,7 +16,17 @@ Cómo ejecutar este proyecto
 1.Compilar mediante el comando make.
 2.Para ejecutar debes estar conciente de las siguientes definiciones para los flags para los diferentes archivos:
 
-<code>  Primer Programa </code>
+<code>  Primer Programa 
+
+-i: es el archivo de entrada 
+ 
+-o: es el archivo de salida
+
+-d: es el separador
+ 
+-c: es el indicador de columnas
+
+</code>
 
 Primer Programa
 
