@@ -28,57 +28,45 @@ Cómo ejecutar este proyecto
        
        -c: es el indicador de columnas
       
+Ejemplo de comando para ejecutar:
 
+              ./cout -i input.txt -o ouput.txt -d : -c 2,4      
 
+<h3>Segundo Programa</h3>
 
-
-
-
-
--i: es el archivo de entrada 
- 
--o: es el archivo de salida
-
--d: es el separador
- 
--c: es el indicador de columnas
+       -i: es el archivo de entrada 
+       
+       -o: es el archivo de salida
+       
+       -s: es el caracter original del archivo a modificar
+       
+       -S: es el caracter nuevo que se escribira
 
 Ejemplo de comando para ejecutar:
 
-./cout -i input.txt -o ouput.txt -d : -c 2,4
+              ./srep -i input.txt -o ouput.txt -s root -S hola
+      
+<h3>Tercer Programa</h3>
 
-Segundo Programa
-
--i: es el archivo de entrada 
- 
--o: es el archivo de salida
-
--s: es el caracter original del archivo a modificar
- 
--S: es el caracter nuevo que se escribira
-
+       -i: es el archivo de entrada 
+       
+       -C: es el que cuenta el numero de caracteres
+       
+       -L: es el que cuenta el numero de lineas
+       
 Ejemplo de comando para ejecutar:
 
-./srep -i input.txt -o ouput.txt -s root -S hola
-
-Tercer Programa
-
--i: es el archivo de entrada 
- 
--C: es el que cuenta el numero de caracteres
- 
--L: es el que cuenta el numero de lineas
-
-Ejemplo de comando para ejecutar:
-
-./count -i input.txt -C -L
-./count -i input.txt -L -C
-./count -i input.txt -L
-./count -i input.txt -C
+              ./count -i input.txt -C -L
+      
+              ./count -i input.txt -L -C
+   
+              ./count -i input.txt -L
+       
+              ./count -i input.txt -C
 
 Obs: El programa está preparado para valores erróneos que puedan ser ingresados.
 
-Excepciones
+<h3>Excepciones</h3>
 
 Segundo Programa
 
