@@ -79,7 +79,7 @@ Ejemplo de compilado correcto:
               
 Lo anterior debido a que el programa reemplaza hasta que lea un espacio en blanco.
 
-Caso de erroneo:
+Caso erroneo:
 
               ./srep -i input.txt -o ouput.txt -s root -S hola mundo
        
