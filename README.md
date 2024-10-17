@@ -20,12 +20,12 @@ Cómo ejecutar este proyecto
 
 <h3>Primer Programa</h3>
 
-    <?php
+    <
        -i: es el archivo de entrada 
        -o: es el archivo de salida
        -d: es el separador
        -c: es el indicador de columnas
-    ?>
+    >
       
 
 
