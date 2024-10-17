@@ -38,9 +38,9 @@ Ejemplo de comando para ejecutar:
        
        -o: es el archivo de salida
        
-       -s: es el caracter original del archivo a modificar
+       -s: es el String original del archivo a modificar
        
-       -S: es el caracter nuevo que se escribira
+       -S: es el String nuevo que se escribira
 
 Ejemplo de comando para ejecutar:
 
@@ -71,7 +71,7 @@ Obs: El programa está preparado para valores erróneos que puedan ser ingresado
 <h3>Segundo Programa</h3>
 
 
-Los comandos separados por ejemplo hola mundo, deben ser escritos entre comillas para realizar el correcto reemplazo.
+Los comandos separados por ejemplo "hola mundo", deben ser escritos entre comillas para realizar el correcto reemplazo.
 
 Ejemplo de compilado correcto:
 
@@ -86,7 +86,7 @@ Caso erroneo:
               ./srep -i input.txt -o ouput.txt -s root -S hola mundo
        
             
-Se cambiara los root solo por hola y no la palabra completa.
+Se cambiara los root solo por "hola" y no la palabra completa.
 
 Existen comandos que deben ser escritos doblemente debido a diversos factores en el sistema operativo Linux. Por ejemplo:
 <code>"/".</code>
