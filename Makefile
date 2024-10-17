@@ -20,11 +20,14 @@ count.o: count.c
 	gcc $(FLAGS) -c count.c
 
 # Regla para srep
-srep: srep.o
-	gcc $(FLAGS) -o srep srep.o
+srep: srep.o funcionessrep.o
+	gcc $(FLAGS) -o srep srep.o funcionessrep.o
 
-srep.o: srep.c
+srep.o: srep.c funcionessrep.h
 	gcc $(FLAGS) -c srep.c
+
+funcionessrep.o: funcionessrep.c funcionessrep.h
+	gcc $(FLAGS) -c funcionessrep.c
 
 # Limpiar archivos generados
 clear:
