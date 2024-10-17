@@ -2,7 +2,7 @@
 
 Este repositorio contiene el primer laboratorio del curso de Sistemas Operativos, principalmente enfocado en diferentes aspectos del manejo de procesos en un sistema operativo Linux.
 
-Laboratorio 1: Funciones Unix
+<h2>Laboratorio 1: Funciones Unix</h2>
 
 Este laboratorio tiene como objetivo aplicar técnicas de programación imperativa mediante lenguaje C, como la recepción de parámetros mediante getopt y compilación mediante Makefile sobre sistema operativo Linux.
 
@@ -66,17 +66,10 @@ Ejemplo de comando para ejecutar:
 
 Obs: El programa está preparado para valores erróneos que puedan ser ingresados.
 
-<h3>Excepciones</h3>
+<h2>Excepciones</h2>
 
-<h2>Segundo Programa</h2>
+<h3>Segundo Programa</h3>
 
-First item
-- Second item
-- Third item
-- Fourth item	+ First item
-* Second item
-- Third item
-+ Fourth item
 
 Los comandos separados por ejemplo hola mundo, deben ser escritos entre comillas para realizar el correcto reemplazo.
 Ejemplo de compilado correcto:
