@@ -68,6 +68,15 @@ Obs: El programa está preparado para valores erróneos que puedan ser ingresado
 
 <h2>Excepciones</h2>
 
+<h3>Primer Programa</h3>
+
+Hay algunos casos en las cuales puede dar error, al colocar el separador indicado:
+
+Caso de fallo:
+
+              ./cut -i input.txt -o ouput.txt -d ; -c 2,4,3
+
+                          
 <h3>Segundo Programa</h3>
 
 
@@ -100,7 +109,7 @@ Ejemplo de compilado correcto:
 En este laboratorio se implementara algunas funciones simplificadas de las que provienen UNIX, en la que se realizaran distintas manipulaciones de texto sobre los archivos csv entregados. Cada una de estas funciones sera un archivo .c distinto, el cual realizara el simil de la funcion UNIX respectiva. Finalmente, estos archivos se ejecutaran por linea de comando.
 
 <h3>Funcion Cut</h3>
-El programa cut se usa para extraer informaci´on sobre nuestro archivo de entrada .csv o, en caso de no especificar un archivo de entrada, sobre un stdin, con el objetivo de obtener ciertas columnas
+El programa cut se usa para extraer informacion sobre nuestro archivo de entrada .csv o, en caso de no especificar un archivo de entrada, sobre un stdin, con el objetivo de obtener ciertas columnas
 de interes.
 
 <h3>Funcion Srep</h3>
