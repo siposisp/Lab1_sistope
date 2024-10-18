@@ -1,9 +1,0 @@
-root:x:0:0:roo
-www-data:x:33:33:www-da
-list:x:38:38:Mailing Lis
-gnats:x:41:41:Gna
-nobody:x:65534:65534:nobody:/nonexisten
-systemd-ne
-systemd-resolve:x:101:103:sys
-messagebus:x:102:105::/nonexisten
-systemd-
