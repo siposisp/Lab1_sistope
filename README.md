@@ -30,7 +30,7 @@ Cómo ejecutar este proyecto
       
 Ejemplo de comando para ejecutar:
 
-              ./cout -i input.txt -o ouput.txt -d : -c 2,4      
+              ./cut -i input.txt -o ouput.txt -d : -c 2,4      
 
 <h3>Segundo Programa</h3>
 
