@@ -1,4 +1,4 @@
-<h1>Sistemas Operativos: Laboratorio 1</h1>
+<h1>Sistemas Operativos: Laboratorio 1 (Nota 7)</h1>
 
 Este repositorio contiene el primer laboratorio del curso de Sistemas Operativos, principalmente enfocado en diferentes aspectos del manejo de procesos en un sistema operativo Linux.
 
